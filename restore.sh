@@ -1,6 +1,9 @@
 dir="$1"
 malicious_dir="$2"
 
+WHITELIST_FILE="whitelist.txt"
+touch "$WHITELIST_FILE"
+
 while true; do
 	files=("$malicious_dir"/*)
 	if [ ! -e "${files[0]}" ]; then
@@ -26,6 +29,7 @@ while true; do
 
 	if [ "$opt" -eq 1 ]; then
 		mv "$selected_file" "$dir/$filename"
+		echo "$filename" >> "$WHITELIST_FILE"
 		echo "Restored $filename to $dir"
 	elif [ "$opt" -eq 2 ]; then
 		rm "$selected_file"

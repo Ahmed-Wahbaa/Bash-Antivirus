@@ -3,6 +3,9 @@
 dir="$1"
 malicious_dir="$2"
 interval="$3"
+# Bounas part
+WHITELIST_FILE="whitelist.txt"
+touch "$WHITELIST_FILE"
 
 mkdir -p "$dir" "$malicious_dir"
 
@@ -11,6 +14,11 @@ ls -l "$dir" > directory-info.last
 for file in "$dir"/*; do
     if [ -f "$file" ]; then
         filename=$(basename "$file")
+	#skip file if in whitelist.txt
+	if grep -qxF "$filename" "$WHITELIST_FILE" 2>/dev/null; then
+		continue
+	fi
+
         is_malicious=0
 
         case "$filename" in
@@ -39,6 +47,10 @@ while true; do
         for file in "$dir"/*; do
             if [ -f "$file" ]; then
                 filename=$(basename "$file")
+		# skip file if in whitlist.txt
+		if grep -qxF "$filename" "$WHITELIST_FILE" 2>/dev/null; then
+                	continue
+       	        fi
                 is_malicious=0
 
                 case "$filename" in

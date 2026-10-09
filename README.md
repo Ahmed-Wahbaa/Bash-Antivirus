@@ -6,7 +6,8 @@ quarantined files and maintain a whitelist of false positives
 
 antivirusd.sh (Antivirus monitoring daemon script)
 restore.sh (Interactive restore utilty)
-whitelist.txt (persistent whitelist for safe files)
+antivirus-cron.sh (single-pass scan script for cron scheduling)(bounus 1)
+whitelist.txt (persistent whitelist for safe files)(bounus 2)
 Makefile (Build and automation file)
 READ.md (Project documentation)
 
